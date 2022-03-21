@@ -18,6 +18,15 @@ I am going to be using React.js, Axios, and React-Bootstrap.There will be a comp
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+Name of feature: Set up your React repo and api keys
+
+Estimate of time needed to complete: 1 hr
+
+Start time: 1:40pm
+
+Finish time: _____
+
+Actual time needed to complete: _____
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->

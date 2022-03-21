@@ -1,9 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
+import UserForm from './UserForm';
 
 class App extends React.Component {
   constructor(props) {
@@ -35,17 +34,7 @@ class App extends React.Component {
     let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`;
     return(
       <>
-      <Form onSubmit={this.getCityData}>
-        <Form.Group controlId="city">
-          <Form.Label>City Name</Form.Label>
-          <Form.Control onInput={this.handleCity} type="text"/>
-        </Form.Group>
-          <Button 
-            variant="primary" 
-            type="submit">
-            Explore!
-          </Button>
-      </Form>
+      <UserForm handleCity={this.handleCity} getCityData={this.getCityData}/>
 
       <Image src={mapURL}/>
 

@@ -29,5 +29,15 @@ Finish time: 2:43pm
 
 Actual time needed to complete: 1hr
 
+Name of feature: Locations
+
+Estimate of time needed to complete: 1 hr
+
+Start time: 2:57pm
+
+Finish time: 3:48pm
+
+Actual time needed to complete: 50 min
+
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->

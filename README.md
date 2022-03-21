@@ -39,5 +39,15 @@ Finish time: 3:48pm
 
 Actual time needed to complete: 50 min
 
+Name of feature: Map
+
+Estimate of time needed to complete: 1 hr
+
+Start time: 4:06pm
+
+Finish time: 
+
+Actual time needed to complete: 
+
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->

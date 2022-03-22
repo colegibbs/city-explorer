@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import UserForm from './UserForm';
 import GeoModal from './GeoModal';
+import ErrorAlert from './ErrorAlert';
 import './App.css';
 
 class App extends React.Component {
@@ -12,8 +13,7 @@ class App extends React.Component {
       mapURL: '',
       city: '',
       showModal: false,
-      error: false,
-      errorMessage: '',
+      errorResponse: '',
     }
   }
   handleCity = (event) => {
@@ -23,6 +23,7 @@ class App extends React.Component {
   }
 
   getCityData = async (event) => {
+    try {
     event.preventDefault();
     let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_API_KEY}&q=${this.state.city}&format=json`);
     this.setState({
@@ -30,6 +31,12 @@ class App extends React.Component {
       mapURL: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`,
       showModal: true,
     });
+    }
+    catch(error) {
+      this.setState({
+        errorResponse: error.response.status,
+      });
+    }
   } 
 
   handleClose = () => {
@@ -44,7 +51,10 @@ class App extends React.Component {
       <>
       <UserForm handleCity={this.handleCity} getCityData={this.getCityData}/>
 
-      <GeoModal showModal={this.state.showModal} handleClose={this.handleClose} cityData={this.state.cityData} mapURL={mapURL}/>
+      {this.state.errorResponse ?
+        <ErrorAlert errorResponse={this.state.errorResponse}/> :
+        <GeoModal showModal={this.state.showModal} handleClose={this.handleClose} cityData={this.state.cityData} mapURL={mapURL}/>
+      }
       </>
     );
   }

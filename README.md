@@ -19,7 +19,7 @@ I am going to be using React.js, Axios, and React-Bootstrap.There will be a comp
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
-Name of feature: Set up your React repo and api keys
+### Name of feature: Set up your React repo and api keys
 
 Estimate of time needed to complete: 1 hr
 
@@ -29,7 +29,7 @@ Finish time: 2:43pm
 
 Actual time needed to complete: 1hr
 
-Name of feature: Locations
+### Name of feature: Locations
 
 Estimate of time needed to complete: 1 hr
 
@@ -39,15 +39,25 @@ Finish time: 3:48pm
 
 Actual time needed to complete: 50 min
 
-Name of feature: Map
+### Name of feature: Map
 
 Estimate of time needed to complete: 1 hr
 
 Start time: 4:06pm
 
-Finish time: 
+Finish time: 5:30pm
 
-Actual time needed to complete: 
+Actual time needed to complete: 1hr and 25 minutes
+
+### Name of feature: Errors
+
+Estimate of time needed to complete: 30 min
+
+Start time: 10:00pm
+
+Finish time: 10:40pm
+
+Actual time needed to complete: 40 min
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->

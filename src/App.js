@@ -1,7 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Image from 'react-bootstrap/Image';
 import UserForm from './UserForm';
 import GeoModal from './GeoModal';
 
@@ -46,14 +44,6 @@ class App extends React.Component {
       <UserForm handleCity={this.handleCity} getCityData={this.getCityData}/>
 
       <GeoModal showModal={this.state.showModal} handleClose={this.handleClose} cityData={this.state.cityData} mapURL={mapURL}/>
-{/* 
-      <Image src={mapURL}/>
-
-      <ListGroup>
-        <ListGroup.Item>Name: {this.state.cityData.display_name}</ListGroup.Item>
-        <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
-        <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
-      </ListGroup> */}
       </>
     );
   }

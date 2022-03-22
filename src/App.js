@@ -3,6 +3,7 @@ import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
 import UserForm from './UserForm';
+import GeoModal from './GeoModal';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class App extends React.Component {
       cityData: {},
       mapURL: '',
       city: '',
+      showModal: false,
       error: false,
       errorMessage: '',
     }
@@ -26,9 +28,16 @@ class App extends React.Component {
     let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_API_KEY}&q=${this.state.city}&format=json`);
     this.setState({
       cityData: cityData.data[0],
-      mapURL: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`
+      mapURL: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`,
+      showModal: true,
     });
   } 
+
+  handleClose = () => {
+    this.setState({
+      showModal: false,
+    });
+  }
 
   render() {
     let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`;
@@ -36,13 +45,15 @@ class App extends React.Component {
       <>
       <UserForm handleCity={this.handleCity} getCityData={this.getCityData}/>
 
+      <GeoModal showModal={this.state.showModal} handleClose={this.handleClose} cityData={this.state.cityData} mapURL={mapURL}/>
+{/* 
       <Image src={mapURL}/>
 
       <ListGroup>
         <ListGroup.Item>Name: {this.state.cityData.display_name}</ListGroup.Item>
         <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
         <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
-      </ListGroup>
+      </ListGroup> */}
       </>
     );
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import UserForm from './UserForm';
 import GeoModal from './GeoModal';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {

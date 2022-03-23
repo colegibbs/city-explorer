@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       cityData: {},
+      weatherData: [],
       mapURL: '',
       city: '',
       showModal: false,
@@ -24,20 +25,22 @@ class App extends React.Component {
 
   getCityData = async (event) => {
     try {
-    event.preventDefault();
-    let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_API_KEY}&q=${this.state.city}&format=json`);
-    this.setState({
-      cityData: cityData.data[0],
-      mapURL: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`,
-      showModal: true,
-    });
+      event.preventDefault();
+      let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_API_KEY}&q=${this.state.city}&format=json`);
+      let weatherData = await axios.get(`https://city-explorer-api-codefellows.herokuapp.com/weather?searchQuery=${this.state.city}`);
+      this.setState({
+        cityData: cityData.data[0],
+        weatherData: weatherData.data,
+        mapURL: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`,
+        showModal: true,
+      });
     }
-    catch(error) {
+    catch (error) {
       this.setState({
         errorResponse: error.response.status,
       });
     }
-  } 
+  }
 
   handleClose = () => {
     this.setState({
@@ -47,14 +50,20 @@ class App extends React.Component {
 
   render() {
     let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`;
-    return(
+    return (
       <>
-      <UserForm handleCity={this.handleCity} getCityData={this.getCityData}/>
+        <UserForm handleCity={this.handleCity} getCityData={this.getCityData} />
 
-      {this.state.errorResponse ?
-        <ErrorAlert errorResponse={this.state.errorResponse}/> :
-        <GeoModal showModal={this.state.showModal} handleClose={this.handleClose} cityData={this.state.cityData} mapURL={mapURL}/>
-      }
+        {this.state.errorResponse ?
+          <ErrorAlert errorResponse={this.state.errorResponse} /> :
+          <GeoModal
+            showModal={this.state.showModal}
+            handleClose={this.handleClose}
+            cityData={this.state.cityData}
+            mapURL={mapURL}
+            weatherData={this.state.weatherData}
+          />
+        }
       </>
     );
   }

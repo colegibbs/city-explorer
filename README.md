@@ -1,4 +1,4 @@
-# Project Name
+# City Explporer
 
 **Author**: Cole Gibbs
 **Version**: 1.0.0
@@ -61,3 +61,15 @@ Actual time needed to complete: 40 min
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+**Version**: 2.0.0
+
+### Name of feature: Weather - Front End
+
+Estimate of time needed to complete: 30 min
+
+Start time: 5 pm
+
+Finish time: 5:30pm
+
+Actual time needed to complete: 30 min

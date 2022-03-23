@@ -15,6 +15,8 @@ Users will have to close my git repo from GitHub and in their terminal run an 'n
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 I am going to be using React.js, Axios, and React-Bootstrap.There will be a component called App.js which will be the main componenet and there will also be a Input.js to deal with the form for this lab.The form will change state on App.js and the Api call will be made in App.js.
 
+![WRRC](./lab-06-wrrc.jpeg)
+
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 

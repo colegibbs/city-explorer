@@ -7,7 +7,7 @@ class UserForm extends React.Component {
 
   render() {
     return(
-      <Form onSubmit={this.props.getCityData}>
+      <Form onSubmit={this.props.getData}>
       <Form.Group controlId="city">
         <Form.Label>City Name</Form.Label>
         <Form.Control onInput={this.props.handleCity} type="text"/>

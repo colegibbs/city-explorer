@@ -23,24 +23,60 @@ class App extends React.Component {
     })
   }
 
-  getCityData = async (event) => {
+  getData = (event) => {
+    event.preventDefault();
+    // this.getWeatherData();
+    this.getCityData();
+  }
+
+  getCityData = async () => {
     try {
-      event.preventDefault();
+      // event.preventDefault();
       let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_API_KEY}&q=${this.state.city}&format=json`);
-      let weatherData = await axios.get(`https://city-explorer-api-codefellows.herokuapp.com/weather?searchQuery=${this.state.city}`);
+      // let weatherData = await axios.get(`https://city-explorer-api-codefellows.herokuapp.com/weather?searchQuery=${this.state.city}`);
       this.setState({
         cityData: cityData.data[0],
-        weatherData: weatherData.data,
+        lat: cityData.data[0].lat,
+        lon: cityData.data[0].lon,
+        // weatherData: weatherData.data,
         mapURL: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`,
         showModal: true,
       });
+      console.log(this.state.lat, 'city');
     }
     catch (error) {
       this.setState({
         errorResponse: error.response.status,
       });
     }
+    try {
+      console.log(this.state.lat, 'weather');
+      let weatherData = await axios.get(`https://city-explorer-api-codefellows.herokuapp.com/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
+      this.setState({
+        weatherData: weatherData.data,
+      })
+    } 
+    catch (error) {
+      this.setState({
+        errorResponse: error.response.status,
+      });
+    }
   }
+
+  // getWeatherData = async () => {
+  //   try {
+  //     console.log(this.state.lat, 'weather');
+  //     let weatherData = await axios.get(`https://city-explorer-api-codefellows.herokuapp.com/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
+  //     this.setState({
+  //       weatherData: weatherData.data,
+  //     })
+  //   } 
+  //   catch (error) {
+  //     this.setState({
+  //       errorResponse: error.response.status,
+  //     });
+  //   }
+  // }
 
   handleClose = () => {
     this.setState({
@@ -52,7 +88,7 @@ class App extends React.Component {
     let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`;
     return (
       <>
-        <UserForm handleCity={this.handleCity} getCityData={this.getCityData} />
+        <UserForm handleCity={this.handleCity} getData={this.getData} />
 
         {this.state.errorResponse ?
           <ErrorAlert errorResponse={this.state.errorResponse} /> :

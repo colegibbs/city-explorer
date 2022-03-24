@@ -11,6 +11,7 @@ class App extends React.Component {
     this.state = {
       cityData: {},
       weatherData: [],
+      movieData: [],
       mapURL: '',
       city: '',
       showModal: false,
@@ -54,8 +55,19 @@ class App extends React.Component {
       let weatherData = await axios.get(`http://localhost:3001/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
       this.setState({
         weatherData: weatherData.data,
-      })
-    } 
+      });
+    }
+    catch (error) {
+      this.setState({
+        errorResponse: error.response.status,
+      });
+    }
+    try {
+      let movieData = await axios.get(`http://localhost:3001/movies?city=${this.state.city}`);
+      this.setState({
+        movieData: movieData.data,
+      });
+    }
     catch (error) {
       this.setState({
         errorResponse: error.response.status,
@@ -98,6 +110,7 @@ class App extends React.Component {
             cityData={this.state.cityData}
             mapURL={mapURL}
             weatherData={this.state.weatherData}
+            movieData={this.state.movieData}
           />
         }
       </>

@@ -42,7 +42,7 @@ class GeoModal extends React.Component {
             <Image src={this.props.mapURL}/>
             {weathers}
             <ListGroup as="ol" numbered>
-              <ListGroup.Item variant="primary">{this.props.cityData.display_name} Movies!</ListGroup.Item>
+              <ListGroup.Item variant="primary">Seattle Movies!</ListGroup.Item>
               {movies}
             </ListGroup>
           </Modal.Body>

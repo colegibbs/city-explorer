@@ -1,5 +1,6 @@
 import React from 'react';
 import Weather from './Weather';
+import Movies from './Movies';
 import Modal from 'react-bootstrap/Modal';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
@@ -18,6 +19,16 @@ class GeoModal extends React.Component {
       );
     })
 
+    let movies = this.props.movieData.map((movie, idx) => {
+      return(
+        <Movies
+          movie={movie}
+          key={idx}
+        />
+      );
+    })
+    console.log(movies);
+
     return(
       <Modal show={this.props.showModal} onHide={this.props.handleClose}>
         <Modal.Header closeButton>
@@ -30,6 +41,10 @@ class GeoModal extends React.Component {
             </ListGroup>
             <Image src={this.props.mapURL}/>
             {weathers}
+            <ListGroup as="ol" numbered>
+              <ListGroup.Item variant="primary">Seattle Movies!</ListGroup.Item>
+              {movies}
+            </ListGroup>
           </Modal.Body>
       </Modal>
     );

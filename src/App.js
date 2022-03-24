@@ -11,6 +11,7 @@ class App extends React.Component {
     this.state = {
       cityData: {},
       weatherData: [],
+      movieData: [],
       mapURL: '',
       city: '',
       showModal: false,
@@ -25,8 +26,8 @@ class App extends React.Component {
 
   getData = (event) => {
     event.preventDefault();
-    // this.getWeatherData();
     this.getCityData();
+    // this.getWeatherData();
   }
 
   getCityData = async () => {
@@ -51,11 +52,22 @@ class App extends React.Component {
     }
     try {
       console.log(this.state.lat, 'weather');
-      let weatherData = await axios.get(`https://city-explorer-api-codefellows.herokuapp.com/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
+      let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
       this.setState({
         weatherData: weatherData.data,
-      })
-    } 
+      });
+    }
+    catch (error) {
+      this.setState({
+        errorResponse: error.response.status,
+      });
+    }
+    try {
+      let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movies?city=${this.state.city}`);
+      this.setState({
+        movieData: movieData.data,
+      });
+    }
     catch (error) {
       this.setState({
         errorResponse: error.response.status,
@@ -98,6 +110,7 @@ class App extends React.Component {
             cityData={this.state.cityData}
             mapURL={mapURL}
             weatherData={this.state.weatherData}
+            movieData={this.state.movieData}
           />
         }
       </>
